@@ -1,3 +1,5 @@
 language: java
 cache:
-  directories: src/main/app/node_modules
+  directories:
+    - src/main/app/node_modules
+    - $HOME/.m2
