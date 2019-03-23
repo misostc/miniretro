@@ -20,4 +20,14 @@ public class BoardColumn extends AbstractEntity {
     private Long sortOrder;
     @OneToMany(mappedBy = "boardColumn")
     private List<Note> notes;
+
+    @Override
+    public Board findBoard() {
+        return board;
+    }
+
+    @Override
+    public AbstractEntity findParent() {
+        return board;
+    }
 }

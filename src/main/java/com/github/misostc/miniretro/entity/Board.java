@@ -14,4 +14,14 @@ public class Board extends AbstractEntity {
     private String name;
     @OneToMany(mappedBy = "board")
     private List<BoardColumn> boardColumns;
+
+    @Override
+    public Board findBoard() {
+        return this;
+    }
+
+    @Override
+    public AbstractEntity findParent() {
+        return null;
+    }
 }

@@ -17,4 +17,14 @@ public class Vote extends AbstractEntity {
     private Note note;
     @Column(name = "user_hash")
     private String userHash;
+
+    @Override
+    public Board findBoard() {
+        return note.getBoardColumn().getBoard();
+    }
+
+    @Override
+    public AbstractEntity findParent() {
+        return note;
+    }
 }

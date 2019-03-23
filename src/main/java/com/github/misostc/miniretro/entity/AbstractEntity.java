@@ -30,4 +30,7 @@ public abstract class AbstractEntity {
     private UUID id;
     @CreatedDate
     private Date createdDate;
+
+    public abstract Board findBoard();
+    public abstract AbstractEntity findParent();
 }

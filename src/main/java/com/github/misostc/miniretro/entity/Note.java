@@ -22,4 +22,14 @@ public class Note extends AbstractEntity {
     private List<Comment> comments;
     @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
     private List<Vote> votes;
+
+    @Override
+    public Board findBoard() {
+        return boardColumn.getBoard();
+    }
+
+    @Override
+    public AbstractEntity findParent() {
+        return boardColumn;
+    }
 }

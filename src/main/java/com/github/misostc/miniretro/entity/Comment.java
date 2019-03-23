@@ -15,4 +15,14 @@ public class Comment extends AbstractEntity {
     @ManyToOne
     private Note note;
     private String content;
+
+    @Override
+    public Board findBoard() {
+        return note.getBoardColumn().getBoard();
+    }
+
+    @Override
+    public AbstractEntity findParent() {
+        return note;
+    }
 }
