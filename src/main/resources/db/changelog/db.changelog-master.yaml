@@ -1,4 +1,125 @@
+.abstractEntityColumns:
+  - &idColumn
+    column:
+      name: "id"
+      type: "uuid"
+      constraints:
+        primaryKey: true
+        nullable: false
+  - &createdDateColumn
+    column:
+      name: "created_date"
+      type: "DATETIME"
+      constraints:
+        nullable: false
+
 databaseChangeLog:
-  - changeset:
+  - changeSet:
       id: 1
       author: misostc
+      changes:
+        - createTable:
+            tableName: "board"
+            columns:
+              - *idColumn
+              - *createdDateColumn
+              - column:
+                  name: "name"
+                  type: "java.sql.Types.VARCHAR(255)"
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: "board_column"
+            columns:
+              - *idColumn
+              - *createdDateColumn
+              - column:
+                  name: "name"
+                  type: "java.sql.Types.VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "sort_order"
+                  type: "BIGINT"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "board_id"
+                  type: "uuid"
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: "fk_board_column_board"
+            baseColumnNames: "board_id"
+            baseTableName: "board_column"
+            referencedColumnNames: "id"
+            referencedTableName: "board"
+        - createTable:
+            tableName: "note"
+            columns:
+              - *idColumn
+              - *createdDateColumn
+              - column:
+                  name: "content"
+                  type: "java.sql.Types.VARCHAR(1024)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "board_column_id"
+                  type: "uuid"
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: "fk_note_board_column"
+            baseColumnNames: "board_column_id"
+            baseTableName: "note"
+            referencedColumnNames: "id"
+            referencedTableName: "board_column"
+        - createTable:
+            tableName: "comment"
+            columns:
+              - *idColumn
+              - *createdDateColumn
+              - column:
+                  name: "content"
+                  type: "java.sql.Types.VARCHAR(1024)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "note_id"
+                  type: "uuid"
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: "fk_comment_note"
+            baseColumnNames: "note_id"
+            baseTableName: "comment"
+            referencedColumnNames: "id"
+            referencedTableName: "note"
+        - createTable:
+            tableName: "vote"
+            columns:
+              - *idColumn
+              - *createdDateColumn
+              - column:
+                  name: "user_hash"
+                  type: "java.sql.Types.VARCHAR(255)"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "note_id"
+                  type: "uuid"
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: "fk_vote_note"
+            baseColumnNames: "note_id"
+            baseTableName: "vote"
+            referencedColumnNames: "id"
+            referencedTableName: "note"
+        - addUniqueConstraint:
+            columnNames: user_hash, note_id
+            constraintName: uq_vote_hash_note
+            tableName: vote
+
+
