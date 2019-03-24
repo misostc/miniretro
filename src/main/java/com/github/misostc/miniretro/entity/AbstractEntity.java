@@ -9,7 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -29,7 +29,7 @@ public abstract class AbstractEntity {
     @Column(columnDefinition = "uuid", updatable = false)
     private UUID id;
     @CreatedDate
-    private Date createdDate;
+    private Instant createdDate;
 
     public abstract Board findBoard();
     public abstract AbstractEntity findParent();

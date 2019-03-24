@@ -2,6 +2,9 @@ package com.github.misostc.miniretro.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
@@ -15,6 +18,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Configuration
@@ -51,6 +56,9 @@ public class WebSocketsConfig implements WebSocketMessageBrokerConfigurer {
         ObjectMapper objectMapper = Jackson2ObjectMapperBuilder.json()
                 .handlerInstantiator(new Jackson2HalModule.HalHandlerInstantiator(relProvider, null, null))
                 .modulesToInstall(new Jackson2HalModule())
+                .modulesToInstall(new Jdk8Module())
+                .modulesToInstall(new JavaTimeModule())
+                .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .build();
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         converter.setObjectMapper(objectMapper);

@@ -12,8 +12,8 @@ export default function configureStore() {
     reducer(history),
     {},
     compose(
-      applyMiddleware(routerMiddleware(history)),
       applyMiddleware(thunk),
+      applyMiddleware(routerMiddleware(history)),
       w.__REDUX_DEVTOOLS_EXTENSION__
         ? w.__REDUX_DEVTOOLS_EXTENSION__()
         : (a: any) => a
