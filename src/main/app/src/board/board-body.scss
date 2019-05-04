@@ -1,0 +1,14 @@
+.BoardBody {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    &-column {
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    @media only screen and (max-width: 600px) {
+        display: block;
+    }
+}

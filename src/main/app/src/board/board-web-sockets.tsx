@@ -4,8 +4,10 @@ import BoardEntity from "../entity/Board";
 import { State as GlobalState } from "../reducer/reducer";
 import { connect } from "react-redux";
 import { Client as StompClient, Message as StompMessage } from "@stomp/stompjs";
+import { StateChange } from "../entity/StateChange";
+import { stateChanged, StateChangeAction } from "../actions/state-change";
 
-type DispatchProps = {};
+type DispatchProps = { stateChanged: (change:StateChange) => StateChangeAction };
 type OwnProps = { board: BoardEntity };
 type StateProps = {};
 
@@ -29,13 +31,13 @@ class BoardWebSockets extends Component<Props, State> {
 
   onConnect() {
     this.stompClient.subscribe(
-      `/topic/boards/${this.props.board.id}`, this.onMessage
+      `/topic/boards/${this.props.board.id}`, (m) => {this.onMessage(m)}
     );
   }
 
   onMessage(message: StompMessage) {
     const changeObject = JSON.parse(message.body);
-    console.log("received", changeObject);
+    this.props.stateChanged(changeObject);
   }
 
   componentDidMount() {
@@ -48,11 +50,11 @@ class BoardWebSockets extends Component<Props, State> {
   }
 
   render() {
-    return <h1>{this.props.board.id}</h1>;
+    return null;
   }
 }
 
 export default connect(
   undefined,
-  {}
+  { stateChanged }
 )(BoardWebSockets);

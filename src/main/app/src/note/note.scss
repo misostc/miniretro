@@ -1,0 +1,52 @@
+.Note {
+    border: 1px solid rgb(70, 162, 255);
+    border-radius: 5px;
+    overflow: hidden;
+    &-content {
+        padding: 1em;
+    }
+    &-actions {
+        background: #ecf5ff;
+        display: flex;
+        justify-content: flex-end;
+        padding: 0.5em 1em;
+
+        button {
+            background: transparent;
+            border: none;
+            padding: 0.2em 0.5em;
+            line-height: 1;
+            font-size: 1.2em;
+            color: #23548b;
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:hover, &:focus {
+                opacity: .8;
+                outline: none;
+            }
+
+            &:active {
+                position: relative;
+                top: 2px;
+            }
+
+
+            svg, span {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+
+        &-badge {
+            background: #346fb3;
+            color: #fff;
+            font-size: 0.6em;
+            font-weight: bold;
+            padding: 0.3em 0.6em;
+            line-height: 1;
+            border-radius: 20px;
+            margin-left: 0.5em;
+        }
+    }
+}

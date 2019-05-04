@@ -1,20 +1,20 @@
 package com.github.misostc.miniretro.event;
 
-import com.github.misostc.miniretro.entity.AbstractEntity;
+import com.github.misostc.miniretro.dto.AbstractEntityTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.ResourceSupport;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class DatabaseEvent<T extends AbstractEntity> {
+public class DatabaseEvent<T extends AbstractEntityTO> extends ResourceSupport {
     private Type operationType;
-    private Resource<T> resource;
+    private T resource;
 
     public String getResourceName() {
-        return resource.getContent().getClass().getSimpleName();
+        return resource.getClass().getSimpleName().replaceAll("TO$","");
     }
 
     public static enum Type {

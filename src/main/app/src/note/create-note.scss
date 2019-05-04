@@ -1,0 +1,15 @@
+.CreateNote {
+    border-radius: 5px;
+    overflow: hidden;
+    background: #ecf5ff;
+    color: #23548b;
+    font-size: 1.2em;
+    padding: 0.2em;
+    text-align: center;
+    cursor: pointer;
+
+    &:active svg {
+        position: relative;
+        top: 2px;
+    }
+}

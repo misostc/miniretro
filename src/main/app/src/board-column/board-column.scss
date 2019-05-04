@@ -1,0 +1,14 @@
+.BoardColumn {
+    margin: 1em;
+    h2 {
+        text-transform: uppercase;
+        font-size: 1em;
+        color: #777;
+        margin-bottom: 1em;
+        padding: 0 1em;
+    }
+
+    &-note  {
+        margin-bottom: 1em;
+    }
+}
