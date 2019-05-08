@@ -28,24 +28,7 @@ public class MiniretroApplicationTests {
 	}
 
 	@Test
-	public void mapperTest() {
-		BoardColumn bc = new BoardColumn();
-		bc.setId(UUID.randomUUID());
-
-		Note note = new Note();
-		note.setBoardColumn(bc);
-		note.setContent("Olala");
-		note.setComments(new ArrayList<>());
-
-		NoteTO noteTO = new NoteTO();
-		mapperFacade.map(note, noteTO);
-
-		Assert.assertNotNull(noteTO.getContent());
-		Assert.assertNotNull(noteTO.getBoardColumn());
-	}
-
-	@Test
-	public void convertTest() {
+	public void mapTest() {
 		BoardColumn bc = new BoardColumn();
 		bc.setId(UUID.randomUUID());
 

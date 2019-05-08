@@ -1,0 +1,22 @@
+version: "3"
+
+volumes:
+  database_data:
+
+services:
+  database:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: miniretro
+    volumes:
+      - database_data:/var/lib/postgresql/data
+  web:
+    build:
+      context: .
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+    ports:
+      - 8090:8080
+    depends_on:
+      - database

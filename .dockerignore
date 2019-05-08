@@ -1,0 +1,6 @@
+.git/
+target/
+.idea/
+.mvn/
+src/main/app/node_modules
+src/main/app/build
