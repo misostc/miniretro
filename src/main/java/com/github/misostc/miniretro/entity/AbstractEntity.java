@@ -16,9 +16,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue(generator = "UUID")

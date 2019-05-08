@@ -4,12 +4,12 @@ import { faEdit as EditOutline } from "@fortawesome/free-regular-svg-icons";
 import { OpenEditAction, openEdit } from "../actions/ui-actions";
 import { connect } from "react-redux";
 
-type DispatchProps = {openEdit: (noteHref:string) => OpenEditAction};
-type OwnProps = {noteHref: string}
+type DispatchProps = {openEdit: (noteHref:string, noteText:string) => OpenEditAction};
+type OwnProps = {noteHref: string, noteText:string}
 type Props = OwnProps & DispatchProps;
 
 const EditButton: React.FC<Props> = props => {
-  return <button title="Comment" onClick={() => props.openEdit(props.noteHref)}>
+  return <button title="Comment" onClick={() => props.openEdit(props.noteHref, props.noteText)}>
         <FontAwesomeIcon icon={EditOutline} />
       </button>;
 };

@@ -50,6 +50,7 @@ public class MiniretroApplicationTests {
 		bc.setId(UUID.randomUUID());
 
 		Note note = new Note();
+		note.setId(UUID.randomUUID());
 		note.setBoardColumn(bc);
 		note.setContent("Olala");
 		note.setComments(new ArrayList<>());

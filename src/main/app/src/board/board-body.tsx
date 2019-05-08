@@ -1,19 +1,17 @@
 import React, { Component } from "react";
-import { RouteComponentProps } from "react-router";
-import BoardEntity from "../entity/Board";
 import { State } from "../reducer/reducer";
 import { connect } from "react-redux";
-import BoardColumn from "../board-column/board-column";
 import "./board-body.scss";
+import { BoardColumn as BoardColumnEntity } from "../entity/entities";
+import BoardColumn from "../board-column/board-column";
 
 type DispatchProps = {};
-type OwnProps = { board: BoardEntity };
-type StateProps = {};
+type OwnProps = { boardId: string };
+type StateProps = { boardColumns: BoardColumnEntity[] };
 
 type Props = DispatchProps & OwnProps & StateProps;
 
-const BoardBody: React.FC<Props> = ({ board }) => {
-  const { boardColumns } = board;
+const BoardBody: React.FC<Props> = ({ boardColumns }) => {
   return (
     <main className="BoardBody">
       {boardColumns &&
@@ -29,6 +27,10 @@ const BoardBody: React.FC<Props> = ({ board }) => {
 };
 
 export default connect(
-  undefined,
+  (state: State, props: OwnProps) => ({
+    boardColumns: state.board.boardColumns.filter(
+      bc => bc.board === props.boardId
+    )
+  }),
   {}
 )(BoardBody);

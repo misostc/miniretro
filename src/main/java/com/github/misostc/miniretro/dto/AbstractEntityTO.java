@@ -10,5 +10,6 @@ import java.util.UUID;
 @Setter
 public abstract class AbstractEntityTO {
     private UUID id;
+    private String selfLink;
     private Instant createdDate;
 }

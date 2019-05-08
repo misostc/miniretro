@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
-import BoardEntity from "../entity/Board";
 import { State as GlobalState } from "../reducer/reducer";
 import { connect } from "react-redux";
 import { Client as StompClient, Message as StompMessage } from "@stomp/stompjs";
-import { StateChange } from "../entity/StateChange";
 import { stateChanged, StateChangeAction } from "../actions/state-change";
+import {  StateChange } from "../entity/entities";
 
 type DispatchProps = { stateChanged: (change:StateChange) => StateChangeAction };
-type OwnProps = { board: BoardEntity };
+type OwnProps = { boardId: string };
 type StateProps = {};
 
 type State = {  };
@@ -31,7 +30,7 @@ class BoardWebSockets extends Component<Props, State> {
 
   onConnect() {
     this.stompClient.subscribe(
-      `/topic/boards/${this.props.board.id}`, (m) => {this.onMessage(m)}
+      `/topic/boards/${this.props.boardId}`, (m) => {this.onMessage(m)}
     );
   }
 

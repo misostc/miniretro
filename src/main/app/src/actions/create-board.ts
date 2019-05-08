@@ -3,12 +3,10 @@ import { CreateBoardValues } from './../create-board/create-board-form';
 import axios from 'axios';
 import { push, RouterAction } from 'connected-react-router';
 import { ThunkAction } from 'redux-thunk';
-import BoardColumn from '../entity/BoardColumn';
-import Board from '../entity/Board';
 
 export default (values: CreateBoardValues): ThunkAction<void, {}, undefined, RouterAction | BoardLoadedAction> => (dispatch) => {
     axios
-      .post("/boards", <Board>{
+      .post("/boards", {
         name: values.name
       })
       .then(response => {
@@ -18,7 +16,7 @@ export default (values: CreateBoardValues): ThunkAction<void, {}, undefined, Rou
           values.template
             .split(" | ")
             .map((name, index) => {
-              return <BoardColumn>{
+              return {
                 name,
                 sortOrder: index,
                 board: uri
@@ -26,7 +24,7 @@ export default (values: CreateBoardValues): ThunkAction<void, {}, undefined, Rou
             })
             .map(boardColumn => axios.post("/boardColumns", boardColumn))
         ).then(_ => {
-            dispatch(boardLoaded(null));
+            dispatch(boardLoaded({board: null, boardColumns:[], notes:[], votes: [], comments: []}));
             dispatch(push(`/b/${uri.replace(/^.*[/]/, "")}`));
         });
       }); 

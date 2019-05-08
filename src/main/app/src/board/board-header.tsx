@@ -1,25 +1,26 @@
 import React, { Component } from "react";
-import BoardEntity from "../entity/Board";
 import { State } from "../reducer/reducer";
 import { connect } from "react-redux";
 import "./board-header.scss";
+import { ActionCreator } from "redux";
+import sortChange, { SortAction } from "../actions/sort";
 
-type DispatchProps = {};
-type OwnProps = { board: BoardEntity };
-type StateProps = {};
+type DispatchProps = { sortChange: ActionCreator<SortAction> };
+type OwnProps = { boardName: string };
+type StateProps = { sortValue: string };
 
 type Props = DispatchProps & OwnProps & StateProps;
 
-const BoardHeader: React.FC<Props> = ({ board }) => {
+const BoardHeader: React.FC<Props> = ({ boardName, sortValue, sortChange }) => {
   return (
     <header className="BoardHeader">
       <div className="BoardHeader-left">
-        <h1>{board.name}</h1>
+        <h1>{boardName}</h1>
       </div>
       <div className="BoardHeader-right" >
-        <select name="oder">
-          <option value="date">Sort by date</option>
-          <option value="votes">Sort by votes</option>
+        <select name="oder" value={sortValue} onChange={({target}) => sortChange(target.value)}>
+          <option value="BY_DATE">Sort by date</option>
+          <option value="BY_VOTES">Sort by votes</option>
         </select>
       </div>
     </header>
@@ -27,6 +28,6 @@ const BoardHeader: React.FC<Props> = ({ board }) => {
 };
 
 export default connect(
-  undefined,
-  {}
+  (state: State) => ({sortValue: state.sort}),
+  { sortChange }
 )(BoardHeader);

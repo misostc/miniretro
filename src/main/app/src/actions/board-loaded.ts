@@ -1,13 +1,13 @@
-import Board from "../entity/Board";
 import { Action } from "redux";
+import { State } from "../reducer/board-reducer";
 
 export type BoardLoadedAction = Action<"BOARD_LOADED"> & {
-  board: Board | null;
+  state: State
 };
 
-const boardLoaded: (board: Board | null) => BoardLoadedAction = board => ({
+const boardLoaded: (state: State) => BoardLoadedAction = state => ({
   type: "BOARD_LOADED",
-  board
+  state
 });
 
 export default boardLoaded;

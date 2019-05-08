@@ -3,19 +3,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment as CommentOutline } from "@fortawesome/free-regular-svg-icons";
 import { CountBadge } from "./note";
 
-import Comment from "../entity/Comment";
 import { connect } from "react-redux";
 import { OpenCommentsAction, openComments } from "../actions/ui-actions";
+import { NoteComment } from "../entity/entities";
+import { State } from "../reducer/reducer";
 
-type DispatchProps = {openComments: (noteHref: string) => OpenCommentsAction};
-type OwnProps = {noteHref:string, comments?: Comment[]}
-type Props = OwnProps & DispatchProps;
+type StateProps = { comments: NoteComment[] };
+type DispatchProps = { openComments: (noteHref: string) => OpenCommentsAction };
+type OwnProps = { noteId: string; noteHref: string };
+type Props = OwnProps & DispatchProps & StateProps;
 
 const CommentButton: React.FC<Props> = props => {
-  return <button title="Comment" onClick={() => props.openComments(props.noteHref)}>
-        <FontAwesomeIcon icon={CommentOutline} />
-        <CountBadge elements={props.comments} />
-      </button>;
+  return (
+    <button title="Comment" onClick={() => props.openComments(props.noteHref)}>
+      <FontAwesomeIcon icon={CommentOutline} />
+      <CountBadge elements={props.comments} />
+    </button>
+  );
 };
 
-export default connect(undefined, {openComments})(CommentButton)
+export default connect(
+  (state: State, props: OwnProps) => ({
+    comments: state.board.comments.filter(
+      comments => comments.note === props.noteId
+    )
+  }),
+  { openComments }
+)(CommentButton);

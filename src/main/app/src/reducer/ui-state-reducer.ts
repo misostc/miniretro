@@ -24,10 +24,10 @@ const uiReducer: Reducer<State, UIActions> = (
     return {
       newNote: null, newComment: {text: '', noteHref: action.noteHref}, editNote: null
     };
-  }
+  } 
   if (action.type === "OPEN_EDIT") {
     return {
-      newNote: null, newComment: null, editNote: {text: '', noteHref: action.noteHref},
+      newNote: null, newComment: null, editNote: {text: action.noteText, noteHref: action.noteHref},
     };
   }
   if (action.type === "OPEN_NEW") {
@@ -38,6 +38,16 @@ const uiReducer: Reducer<State, UIActions> = (
   if (action.type === "NEW_NOTE_TEXT") {
     return {
       newNote: state.newNote && {...state.newNote, text: action.text}, newComment: null, editNote: null,
+    };
+  }
+  if (action.type === "EDIT_NOTE_TEXT") {
+    return {
+      editNote: state.editNote && {...state.editNote, text: action.text}, newComment: null, newNote: null,
+    };
+  }
+  if (action.type === "CLOSE_ALL") {
+    return {
+      editNote: null, newComment: null, newNote: null,
     };
   }
   return state;

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router";
-import BoardEntity from "../entity/Board";
 import { State } from "../reducer/reducer";
 import { connect } from "react-redux";
 import loadBoard from "../actions/load-board";
 import BoardHeader from "./board-header";
 import BoardBody from "./board-body";
 import BoardWebSockets from "./board-web-sockets";
+import { Board as BoardEntity } from "../entity/entities";
 
 type DispatchProps = { loadBoard: (boardId: string) => void };
 type OwnProps = RouteComponentProps<{ boardId: string }> & {};
@@ -21,16 +21,16 @@ class Board extends Component<Props> {
     if (!currentBoard || boardId !== currentBoard.id) {
       this.props.loadBoard(boardId);
     }
-  } 
+  }
 
   render() {
     const currentBoard = this.props.currentBoard;
     return (
       currentBoard && (
         <>
-          <BoardHeader board={currentBoard} />
-          <BoardBody board={currentBoard} />
-          <BoardWebSockets board={currentBoard} />
+          <BoardHeader boardName={currentBoard.name} />
+          <BoardBody boardId={currentBoard.id} />
+          <BoardWebSockets boardId={currentBoard.id} />
         </>
       )
     );

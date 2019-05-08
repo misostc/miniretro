@@ -4,12 +4,14 @@ import boardReducer, { State as BoardReducerState } from "./board-reducer";
 import userReducer, { State as UserReducerState } from "./user-reducer";
 import { History } from "history";
 import uiStateReducer, { State as UiStateReducerState } from "./ui-state-reducer";
+import sortReducer, { State as SortReducerState } from "./sort-reducer";
 
 export type State = {
   board: BoardReducerState;
   uiState: UiStateReducerState;
   router: RouterState;
   user: UserReducerState;
+  sort: SortReducerState;
 };
 
 export default (history: History) =>
@@ -17,5 +19,6 @@ export default (history: History) =>
     board: boardReducer,
     uiState: uiStateReducer,
     user: userReducer,
-    router: connectRouter(history)
+    router: connectRouter(history),
+    sort: sortReducer
   });
