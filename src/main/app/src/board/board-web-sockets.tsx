@@ -6,6 +6,8 @@ import { Client as StompClient, Message as StompMessage } from "@stomp/stompjs";
 import { stateChanged, StateChangeAction } from "../actions/state-change";
 import {  StateChange } from "../entity/entities";
 
+const wsProtocol = window.location.href.match('http:') ? 'wss' : 'ws';
+
 type DispatchProps = { stateChanged: (change:StateChange) => StateChangeAction };
 type OwnProps = { boardId: string };
 type StateProps = {};
@@ -16,7 +18,7 @@ type Props = DispatchProps & OwnProps & StateProps;
 
 class BoardWebSockets extends Component<Props, State> {
   stompConfig = {
-    brokerURL: `ws://${window.location.hostname}:${window.location.port}/websocket`,
+    brokerURL: `${wsProtocol}://${window.location.hostname}:${window.location.port}/websocket`,
     debug: function(str: string) {
       console.log(str);
     },
