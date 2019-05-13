@@ -6,7 +6,7 @@ import { Client as StompClient, Message as StompMessage } from "@stomp/stompjs";
 import { stateChanged, StateChangeAction } from "../actions/state-change";
 import {  StateChange } from "../entity/entities";
 
-const wsProtocol = window.location.href.match('http:') ? 'wss' : 'ws';
+const wsProtocol = window.location.href.match('https:') ? 'wss' : 'ws';
 
 type DispatchProps = { stateChanged: (change:StateChange) => StateChangeAction };
 type OwnProps = { boardId: string };
