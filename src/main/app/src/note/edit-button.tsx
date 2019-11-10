@@ -9,7 +9,7 @@ type OwnProps = {noteHref: string, noteText:string}
 type Props = OwnProps & DispatchProps;
 
 const EditButton: React.FC<Props> = props => {
-  return <button title="Comment" onClick={() => props.openEdit(props.noteHref, props.noteText)}>
+  return <button title="Edit" onClick={() => props.openEdit(props.noteHref, props.noteText)}>
         <FontAwesomeIcon icon={EditOutline} />
       </button>;
 };

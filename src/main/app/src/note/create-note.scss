@@ -1,12 +1,17 @@
 .CreateNote {
-    border-radius: 5px;
     overflow: hidden;
-    background: #ecf5ff;
-    color: #23548b;
+    background: transparent;
+    color: #999;
     font-size: 1.2em;
     padding: 0.2em;
     text-align: center;
     cursor: pointer;
+    transition: all .1s;
+
+    &:hover {
+        background: #fff;
+        box-shadow: 0 5px 5px #ccc;     
+    }
 
     &:active svg {
         position: relative;

@@ -1,15 +1,31 @@
 .Note {
-    border: 1px solid rgb(70, 162, 255);
-    border-radius: 5px;
+    background: #fff;
     overflow: hidden;
+    transition: all .1s;
     &-content {
-        padding: 1em;
+        padding: 1.2em;
+        font-size: 1.3em;
     }
+    
+    &:hover { 
+        box-shadow: 0 5px 5px #ccc;      
+    }
+
+    &:hover &-actions {
+        button {
+            color: #23548b;
+        }
+        &-badge {            
+            background: #346fb3;
+        }
+    }
+
     &-actions {
-        background: #ecf5ff;
+        background: #fff;
         display: flex;
         justify-content: flex-end;
         padding: 0.5em 1em;
+
 
         button {
             background: transparent;
@@ -17,9 +33,9 @@
             padding: 0.2em 0.5em;
             line-height: 1;
             font-size: 1.2em;
-            color: #23548b;
             cursor: pointer;
             white-space: nowrap;
+            color: #ccc;
 
             &:hover, &:focus {
                 opacity: .8;
@@ -39,7 +55,7 @@
         }
 
         &-badge {
-            background: #346fb3;
+            background: #ccc;
             color: #fff;
             font-size: 0.6em;
             font-weight: bold;

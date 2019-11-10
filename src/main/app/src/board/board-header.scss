@@ -1,7 +1,6 @@
 .BoardHeader {
     box-sizing: border-box;
-    padding: 0.7em 2em;
-    background: #eee;
+    padding: 2em 2em 0.7em;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -9,6 +8,7 @@
     align-items: center;
 
     h1 {
-        font-size: 1.3em;
+        font-size: 1.5em;
+        color: rgb(85, 85, 85);
     }
 }

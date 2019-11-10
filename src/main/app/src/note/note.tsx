@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Note as NoteEntity } from "../entity/entities";
 
 import EditButton from "./edit-button";
-import CommentButton from "./comment-button";
+import DeleteButton from "./delete-button";
 import LikeButton from "./like-button";
 
 import "./note.scss";
@@ -31,12 +31,9 @@ const Note: React.FC<Props> = ({ note, openEdit }) => {
       <div className="Note-content">{openEdit ? <EditNoteForm /> : note.content}</div>
       <div className="Note-actions">
         <EditButton noteHref={note.selfLink} noteText={note.content} />
-        {/* <CommentButton
-          noteId={note.id}
-          noteHref={note.selfLink}
-        /> */}
         <LikeButton noteId={note.id} 
           noteHref={note.selfLink} />
+        <DeleteButton noteHref={note.selfLink} noteText={note.content} />
       </div>
     </div>
   );

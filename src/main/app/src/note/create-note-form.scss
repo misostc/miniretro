@@ -1,9 +1,10 @@
 .CreateNoteForm {
-    border-radius: 5px;
     overflow: hidden;
-    background: #ecf5ff;
+    background: transparent;
     padding: 0.5em;
     line-height: 1;
+    background: #fff;
+    box-shadow: 0 5px 5px #ccc;     
 
     textarea {
         display: inline-block;
@@ -16,7 +17,7 @@
     
     button {
         display: inline-block;
-        background: #23548b;
+        background: #999;
         border-radius: 100%;
         width: 32px;
         height: 32px;
